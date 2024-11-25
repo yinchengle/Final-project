@@ -12,10 +12,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch
 
-# 输出图片保存路径
+
 os.makedirs("keep1", exist_ok=True)
 
-# 参数设置
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_epochs", type=int, default=200, help="number of epochs of training")
 parser.add_argument("--batch_size", type=int, default=2, help="size of the batches")
@@ -23,9 +22,8 @@ parser.add_argument("--lr", type=float, default=0.0002, help="adam: learning rat
 parser.add_argument("--b1", type=float, default=0.5, help="adam: decay of first order momentum of gradient")
 parser.add_argument("--b2", type=float, default=0.999, help="adam: decay of first order momentum of gradient")
 parser.add_argument("--n_cpu", type=int, default=8, help="number of cpu threads to use during batch generation")
-# 输入噪声向量维度，默认100
 parser.add_argument("--latent_dim", type=int, default=100, help="dimensionality of the latent space")
-# 输入图片维度，默认64*64*3
+
 parser.add_argument("--img_size1", type=int, default=64, help="size of each image dimension")
 parser.add_argument("--img_size2", type=int, default=64, help="size of each image dimension")
 parser.add_argument("--channels", type=int, default=3, help="number of image channels")
@@ -124,12 +122,12 @@ class MyData(Dataset):  # 继承Dataset
         return img
 
 
-# 输入图片所在文件夹
+
 mydataset = MyData(
     root_dir='final/', transform=img_transform
 )
 
-# data loader 数据载入
+# data loader
 dataloader = DataLoader(
     dataset=mydataset, batch_size=opt.batch_size, shuffle=True
 )
